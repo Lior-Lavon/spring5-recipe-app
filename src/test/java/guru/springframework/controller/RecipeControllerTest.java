@@ -80,7 +80,7 @@ public class RecipeControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/recipe/new"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("recipe/recipeform"))
+                .andExpect(view().name("/recipe/recipeform"))
                 .andExpect(model().attributeExists("recipe"));
     }
 
@@ -88,16 +88,39 @@ public class RecipeControllerTest {
     public void testPostNewRecipeForm() throws Exception {
 
         RecipeCommand recipeCommand = new RecipeCommand();
-        recipeCommand.setId(1L);
+        recipeCommand.setId(2L);
 
         when(recipeService.saveRecipeCommand(any())).thenReturn(recipeCommand);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/recipe")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)    // mimic a form post
                 .param("id", "")                        // mimic an empty string
-                .param("description", "some string"))   // some description
+                .param("description", "some string")
+                .param("directions", "some string")
+//                .param("url", "lior@leaplines.com")
+        )   // some description
                 .andExpect(status().is3xxRedirection()) // expect 3-2 status of redirection
-                .andExpect(view().name("redirect:/recipe/1/show")); // redirection string
+                .andExpect(view().name("redirect:/recipe/2/show")); // redirection string
+    }
+
+    // validation test
+    @Test
+    public void testPostNewRecipeFormValidationFail() throws Exception {
+
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(2L);
+
+        when(recipeService.saveRecipeCommand(any())).thenReturn(recipeCommand);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/recipe")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)    // mimic a form post
+                .param("id", "")                        // mimic an empty string
+                .param("description", "some string")
+                .param("directions", "some string")
+        )   // some description
+                .andExpect(status().is3xxRedirection()) // expect 3-2 status of redirection
+                .andExpect(view().name("redirect:/recipe/2/show")); // redirection string
+
     }
 
     @Test
@@ -110,7 +133,7 @@ public class RecipeControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/recipe/1/update"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("recipe/recipeform"))
+                .andExpect(view().name("/recipe/recipeform"))
                 .andExpect(model().attributeExists("recipe"));
     }
 

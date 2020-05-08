@@ -25,7 +25,7 @@ public class ControllerExceptionHandler {
 
         ModelAndView modelAndView = new ModelAndView();
 
-        // 404error match the view name html
+        // 400  error match the view name html
         modelAndView.setViewName("400error");
         modelAndView.addObject("exception", exception);
 
