@@ -44,7 +44,9 @@ public class ImageControllerTest {
         imageController = new ImageController(recipeService, imageService);
 
         // build Mock Mvc from indexController
-        mockMvc = MockMvcBuilders.standaloneSetup(imageController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(imageController)
+                .setControllerAdvice(new ControllerExceptionHandler()) // Wire in the ControllerAdvise as global handler
+                .build();
 
     }
 
@@ -113,4 +115,6 @@ public class ImageControllerTest {
 
         assertEquals(s.getBytes().length, responseBytes.length);
     }
+
+
 }

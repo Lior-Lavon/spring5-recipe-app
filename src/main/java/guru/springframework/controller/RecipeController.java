@@ -85,20 +85,4 @@ public class RecipeController {
         return modelAndView;
     }
 
-    // Exception Handler using the NotFoundException exception class
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NumberFormatException.class)
-    public ModelAndView HandleNumberFormatException(Exception exception){
-
-        log.error("Handling Number Format exception");
-        log.error(exception.getMessage());
-
-        ModelAndView modelAndView = new ModelAndView();
-
-        // 404error match the view name html
-        modelAndView.setViewName("400error");
-        modelAndView.addObject("exception", exception);
-
-        return modelAndView;
-    }
 }
