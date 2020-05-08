@@ -117,9 +117,10 @@ public class RecipeControllerTest {
                 .param("id", "")                        // mimic an empty string
                 .param("description", "some string")
                 .param("directions", "some string")
+                .param("cookTime", "3000")
         )   // some description
-                .andExpect(status().is3xxRedirection()) // expect 3-2 status of redirection
-                .andExpect(view().name("redirect:/recipe/2/show")); // redirection string
+                .andExpect(status().isOk()) // expect 3-2 status of redirection
+                .andExpect(view().name("/recipe/recipeform")); // redirection string
 
     }
 
