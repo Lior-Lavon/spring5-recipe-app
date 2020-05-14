@@ -40,15 +40,15 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests! and get code coverage
-      - run: mvn integration-test
-#      - run: mvn integration-test cobertura:cobertura
+#      - run: mvn integration-test
+      - run: mvn integration-test cobertura:cobertura
 
       # Store test result
-#      - store_test_results:
-#          path: target/surefire-reports
+      - store_test_results:
+          path: target/surefire-reports
 
       # Send result to CodeCov
-#      - run: bash <(curl -s https://codecov.io/bash)
+      - run: bash <(curl -s https://codecov.io/bash)
 #        name: Send To CodeCov
 #        command: bash <(curl -s https://codecov.io/bash)
 
