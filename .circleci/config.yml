@@ -47,7 +47,7 @@ jobs:
           path: target/surefire-reports
 
       # Send result to CodeCov
-      - run:
-        name: Send To CodeCov
-        command: bash <(curl -s https://codecov.io/bash)
+      - run: bash <(curl -s https://codecov.io/bash)
+#        name: Send To CodeCov
+#        command: bash <(curl -s https://codecov.io/bash)
 
